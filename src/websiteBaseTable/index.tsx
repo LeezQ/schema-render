@@ -2,6 +2,9 @@ import { BaseTable, BaseTableProps } from 'ali-react-table';
 import React from 'react';
 import styled from 'styled-components';
 
+import Text from './components/Text';
+import Date from './components/Date';
+
 const DarkSupportBaseTable: any = styled(BaseTable)`
   ${(props: any) => props.css};
   &.dark {
@@ -19,18 +22,34 @@ const DarkSupportBaseTable: any = styled(BaseTable)`
 `;
 
 interface SchemaTableProps extends BaseTableProps {
-  schema: any;
+  registComponent: any;
 }
+
+const defaultColumnComponent = {
+  Text,
+  Date,
+};
 
 const WebsiteBaseTable = React.forwardRef<BaseTable, SchemaTableProps>(
   (props, ref) => {
-    const { dataSource, columns } = props;
+    const { dataSource, columns, registComponent } = props;
+    const components = {
+      ...defaultColumnComponent,
+      ...registComponent,
+    };
+    const customColumns = columns.map((column, index) => {
+      const renderComponent = column.renderComponent;
+      if (renderComponent) {
+        column.render = components[renderComponent];
+      }
+      return column;
+    });
 
     return (
       <DarkSupportBaseTable
         ref={ref}
         dataSource={dataSource}
-        columns={columns}
+        columns={customColumns}
       />
     );
   },

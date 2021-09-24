@@ -1,2 +1,2 @@
 export { default as WebsiteBaseTable } from './websiteBaseTable';
-export { default as SchemaPage } from './schemaPage';
+export { default as SchemaRender } from './schemaRender';

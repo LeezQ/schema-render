@@ -1,10 +1,10 @@
-## SchemaPage
+## 测试 2
 
 Demo:
 
 ```tsx
 import React from 'react';
-import { SchemaPage } from 'schema-components';
+import { SchemaRender } from 'schema-components';
 import { Table, Button } from 'antd';
 import styled from 'styled-components';
 
@@ -14,7 +14,9 @@ const componentMap: any = {
   AntdButton: Button,
   Table,
   Text: styled.div``,
-  Actions: styled.div``,
+  Actions: styled.div`
+    margin-bottom: 30px;
+  `,
   Form: styled.div``,
   WebsiteBaseTable,
 };
@@ -50,10 +52,13 @@ const schemaString = JSON.stringify({
           {
             component: 'AntdButton',
             id: 'AntdButton_003',
+            children: 'button ',
           },
           {
             component: 'AntdButton',
             id: 'AntdButton_004',
+            children: 'button 4',
+            style: { marginLeft: 30 },
           },
         ],
       },
@@ -75,7 +80,6 @@ const schemaString = JSON.stringify({
     },
     Actions_002: {},
     AntdButton_003: {
-      text: 'button ',
       type: 'primary',
       onClick: '$page.event.changeText',
     },
@@ -154,7 +158,7 @@ const schemaString = JSON.stringify({
 });
 
 export default () => (
-  <SchemaPage
+  <SchemaRender
     title="First Demo"
     componentMap={componentMap}
     schema={schemaString}

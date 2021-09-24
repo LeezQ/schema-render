@@ -12,7 +12,7 @@ let tableProps = {
       code: 'prov',
       name: '省份',
       width: 150,
-      comp: 'TableText',
+      renderComponent: 'TableText',
       align: 'right',
     },
     { code: 'confirmed', name: '确诊', width: 100, align: 'right' },
