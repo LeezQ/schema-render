@@ -9,20 +9,53 @@ interface IComponent {
   children?: any;
 }
 
+const PAGE_KEY_PREFIX = '$P.';
+const COMPONENT_KEY_PREFIX = '$C.';
+const EVENT_KEY_PREFIX = '$E.';
+
+(window as any).PAGE_EVENT = {};
+
 export default function SchemaRender(props: {
   schema: string;
   componentMap: any;
 }) {
-  const { schema = '{}', componentMap = {} } = props;
-  const { structure, data } = JSON.parse(schema, function (k, v) {
-    if (typeof v === 'string' && v.startsWith('$page')) {
-      return function () {
-        console.log(123);
-      };
-    } else if (typeof v === 'string' && v.startsWith('$C')) {
-      return componentMap[v.substr(3)];
+  let { schema = '{}', componentMap = {} } = props;
+  schema = JSON.stringify(schema, function (key, value) {
+    if (typeof value === 'function') {
+      return '/Function(' + value.toString() + ')/';
     }
-    return v;
+    return value;
+  });
+
+  const { structure, data, event } = JSON.parse(schema, function (key, value) {
+    // 匹配关键字
+    if (typeof value === 'string' && value.startsWith(PAGE_KEY_PREFIX)) {
+      // 匹配页面
+      return function () {};
+    } else if (
+      typeof value === 'string' &&
+      value.startsWith(COMPONENT_KEY_PREFIX)
+    ) {
+      // 匹配自定义组件
+      return componentMap[value.replace(COMPONENT_KEY_PREFIX, '')];
+    } else if (
+      typeof value === 'string' &&
+      value.startsWith(EVENT_KEY_PREFIX)
+    ) {
+      // 匹配事件
+      // PAGE_EVENT[EVENT_KEY_PREFIX] = PAGE_EVENT[key];
+      return (window as any).PAGE_EVENT[value.replace(EVENT_KEY_PREFIX, '')];
+    } else if (
+      typeof value === 'string' &&
+      value.startsWith('/Function(') &&
+      value.endsWith(')/')
+    ) {
+      value = value.substring(10, value.length - 2);
+      (window as any).PAGE_EVENT[key] = (0, eval)('(' + value + ')');
+      // return (0, eval)('(' + value + ')');
+    }
+
+    return value;
   });
 
   /**

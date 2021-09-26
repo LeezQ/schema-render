@@ -1,0 +1,101 @@
+{
+  "structure": {
+    "component": "page",
+    "id": "page",
+    "className": "m-l-10",
+    "style": {
+      "marginLeft": 10
+    },
+    "children": [
+      {
+        "component": "Title",
+        "children": "管理应用"
+      },
+      {
+        "component": "Wrap",
+        "id": "Wrap_2123",
+        "children": [
+          {
+            "component": "Content",
+            "children": [
+              {
+                "component": "Actions",
+                "children": [
+                  {
+                    "component": "AddAppBtn",
+                    "id": "AddAppBtn_003",
+                    "children": "申请应用 "
+                  }
+                ]
+              },
+              {
+                "component": "WebsiteBaseTable",
+                "id": "WebsiteBaseTable_010"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "data": {
+    "Form_001": {
+      "title": "我是 title"
+    },
+    "Actions_002": {},
+    "AddAppBtn_003": {},
+    "DetailDrawer_fasd": {},
+    "WebsiteBaseTable_010": {
+      "columns": [
+        {
+          "code": "name",
+          "name": "应用名称",
+          "width": 150
+        },
+        {
+          "code": "created",
+          "name": "创建时间",
+          "width": 100,
+          "render": "$C.Date"
+        },
+        {
+          "code": "status",
+          "name": "状态",
+          "width": 100,
+          "render": "$C.Status"
+        },
+        {
+          "name": "操作",
+          "width": 100,
+          "render": "$C.Options"
+        }
+      ],
+      "dataSource": [
+        {
+          "id": 0,
+          "name": "阿鲁巴物流预警",
+          "created": 1632479873922,
+          "status": "online"
+        },
+        {
+          "id": 1,
+          "name": "阿鲁巴物流预警",
+          "created": 1632479873922,
+          "status": "approving"
+        },
+        {
+          "id": 2,
+          "name": "阿鲁巴物流预警",
+          "created": 1632479873922,
+          "status": "reject"
+        },
+        {
+          "id": 3,
+          "name": "阿鲁巴物流预警",
+          "created": 1632479873922,
+          "status": "offline"
+        }
+      ]
+    }
+  }
+}

@@ -25,22 +25,16 @@ interface SchemaTableProps extends BaseTableProps {
   registComponent: any;
 }
 
-const defaultColumnComponent = {
-  Text,
-  Date,
-};
-
 const WebsiteBaseTable = React.forwardRef<BaseTable, SchemaTableProps>(
   (props, ref) => {
-    const { dataSource, columns, registComponent } = props;
-    const components = {
-      ...defaultColumnComponent,
-      ...registComponent,
-    };
+    const { dataSource, columns, registComponent = {} } = props;
+
     const customColumns = columns.map((column, index) => {
-      const renderComponent = column.renderComponent;
+      const renderComponent = column.render;
       if (renderComponent) {
-        column.render = components[renderComponent];
+        column.render = (value, record, rowIndex) => {
+          return renderComponent.apply(null, [value, record, rowIndex]);
+        };
       }
       return column;
     });
