@@ -1,9 +1,9 @@
 import { BaseTable, BaseTableProps } from 'ali-react-table';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import Text from './components/Text';
 import Date from './components/Date';
+import axios from 'axios';
 
 const DarkSupportBaseTable: any = styled(BaseTable)`
   ${(props: any) => props.css};
@@ -22,28 +22,54 @@ const DarkSupportBaseTable: any = styled(BaseTable)`
 `;
 
 interface SchemaTableProps extends BaseTableProps {
-  registComponent: any;
+  registComponents: [];
+  url?: string;
 }
 
 const WebsiteBaseTable = React.forwardRef<BaseTable, SchemaTableProps>(
   (props, ref) => {
-    const { dataSource, columns, registComponent = {} } = props;
+    const registComponents = props.registComponents || [];
+    const [dataSource, setDataSource] = useState(props.dataSource || []);
+    const [columns, setColumns] = useState(props.columns || []);
+    const [loading, setLoading] = useState(true);
 
-    const customColumns = columns.map((column, index) => {
-      const renderComponent = column.render;
-      if (renderComponent) {
-        column.render = (value, record, rowIndex) => {
-          return renderComponent.apply(null, [value, record, rowIndex]);
-        };
-      }
-      return column;
-    });
+    useEffect(() => {
+      (async () => {
+        if (props.url) {
+          setLoading(true);
+          const res = await axios(props.url);
+          setDataSource(res.data.dataSource);
+          setColumns(
+            res.data.columns.map(
+              (
+                column: {
+                  render: (value: any, record: any, rowIndex: any) => any;
+                },
+                index: any,
+              ) => {
+                const renderComponent = column.render;
+                if (renderComponent) {
+                  column.render = (value, record, rowIndex) => {
+                    return registComponents[renderComponent].apply(null, [
+                      value,
+                      record,
+                      rowIndex,
+                    ]);
+                  };
+                }
+                return column;
+              },
+            ),
+          );
+        }
+      })();
+    }, []);
 
     return (
       <DarkSupportBaseTable
         ref={ref}
         dataSource={dataSource}
-        columns={customColumns}
+        columns={columns}
       />
     );
   },

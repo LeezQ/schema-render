@@ -28,9 +28,10 @@
                   }
                 ]
               },
+
               {
-                "component": "WebsiteBaseTable",
-                "id": "WebsiteBaseTable_010"
+                "component": "ProSchemaTable",
+                "id": "ProSchemaTablee_010"
               }
             ]
           }
@@ -45,55 +46,51 @@
     "Actions_002": {},
     "AddAppBtn_003": {},
     "DetailDrawer_fasd": {},
-    "WebsiteBaseTable_010": {
+    "toolBarRender": "$C.ToolBar",
+
+    "ProSchemaTablee_010": {
+      "url": "https://yapi.jushuitan.com/mock/93/v2/open/api/approvelist",
+      "rowKey": "id",
+      "search": {
+        "labelWidth": "auto"
+      },
+      "columnsState": {
+        "persistenceKey": "pro-table-singe-demos",
+        "persistenceType": "localStorage"
+      },
+      "editable": {
+        "type": "multiple"
+      },
+      "pagination": {
+        "pageSize": 5
+      },
+      "dateFormatter": "string",
+      "headerTitle": "API权限申请",
       "columns": [
         {
-          "code": "name",
-          "name": "应用名称",
-          "width": 150
+          "title": "API权限包",
+          "dataIndex": "name"
         },
         {
-          "code": "created",
-          "name": "创建时间",
-          "width": 100,
-          "render": "$C.Date"
+          "title": "开发者账号",
+          "dataIndex": "developerName"
         },
         {
-          "code": "status",
-          "name": "状态",
-          "width": 100,
+          "title": "身份资质",
+          "dataIndex": "oathType"
+        },
+        {
+          "title": "应用名称",
+          "dataIndex": "appName"
+        },
+        {
+          "title": "状态",
+          "dataIndex": "status",
           "render": "$C.Status"
         },
         {
-          "name": "操作",
-          "width": 100,
+          "title": "操作",
           "render": "$C.Options"
-        }
-      ],
-      "dataSource": [
-        {
-          "id": 0,
-          "name": "阿鲁巴物流预警",
-          "created": 1632479873922,
-          "status": "online"
-        },
-        {
-          "id": 1,
-          "name": "阿鲁巴物流预警",
-          "created": 1632479873922,
-          "status": "approving"
-        },
-        {
-          "id": 2,
-          "name": "阿鲁巴物流预警",
-          "created": 1632479873922,
-          "status": "reject"
-        },
-        {
-          "id": 3,
-          "name": "阿鲁巴物流预警",
-          "created": 1632479873922,
-          "status": "offline"
         }
       ]
     }

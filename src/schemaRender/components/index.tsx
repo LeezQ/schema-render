@@ -1,30 +1,25 @@
-import { Table, Button, Badge, Modal, Drawer } from 'antd';
+import { Table, Button, Badge, Modal, Drawer, Space, Tag } from 'antd';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 
-import { WebsiteBaseTable } from 'schema-components';
+import ProSchemaTable from '../../proSchemaTable';
 import React, { useState } from 'react';
-import SchemaRender from '..';
 
-import demoJSON from '../demo.json';
+import { PlusOutlined } from '@ant-design/icons';
 
 const Detail = () => {
   const [visible, setVisible] = useState(false);
   return (
     <>
       <a href="#" onClick={() => setVisible(true)}>
-        抽屉
+        详情
       </a>
-      <Drawer title="Basic Drawer" placement="right" visible={visible}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Drawer>
     </>
   );
 };
 
 const componentMap: any = {
+  ProSchemaTable,
   AntdButton: Button,
   AntDTable: Table,
   Title: styled.div`
@@ -45,7 +40,6 @@ const componentMap: any = {
     background: #fff;
   `,
 
-  WebsiteBaseTable,
   Status: (status: string) => {
     let ele = null;
     switch (status) {
@@ -72,36 +66,38 @@ const componentMap: any = {
   },
 
   Options: (value: any, record: { id: any }, index: any) => {
+    const OptionWrap = styled.div`
+      a {
+        margin-right: 10px;
+      }
+    `;
     return (
-      <>
-        <a href={`/${record.id}`} target="_blank">
-          详情
-        </a>
+      <OptionWrap>
         <Detail />
-      </>
+        <a href={`/${record.id}`} target="_blank">
+          通过
+        </a>
+        <a href={`/${record.id}`} target="_blank">
+          不通过
+        </a>
+      </OptionWrap>
     );
-  },
-  Date: (
-    value: any,
-    record: { value: string | number | Date | dayjs.Dayjs | null | undefined },
-    index: any,
-  ) => {
-    return <span>{dayjs(record.value).format('YYYY-MM-DD hh:mm')}</span>;
   },
 
-  AddAppBtn: () => {
-    const [visible, setVisible] = useState(false);
-    return (
-      <>
-        <Button type="primary" onClick={() => setVisible(true)}>
-          申请
-        </Button>
-        <Modal title="sdf" visible={visible}>
-          多少度
-          <SchemaRender componentMap={componentMap} schema={demoJSON} />
-        </Modal>
-      </>
-    );
+  ToolBar: (action: any) => {
+    return [
+      <Button
+        key="button"
+        icon={<PlusOutlined />}
+        type="primary"
+        onClick={() => {
+          alert(123);
+        }}
+      >
+        新建
+      </Button>,
+      <Button onClick={() => action.reload()}>刷新</Button>,
+    ];
   },
 };
 
