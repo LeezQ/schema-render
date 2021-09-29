@@ -8,10 +8,6 @@
     },
     "children": [
       {
-        "component": "Title",
-        "children": "管理应用"
-      },
-      {
         "component": "Wrap",
         "id": "Wrap_2123",
         "children": [
@@ -40,12 +36,7 @@
     ]
   },
   "data": {
-    "Form_001": {
-      "title": "我是 title"
-    },
-    "Actions_002": {},
     "AddAppBtn_003": {},
-    "DetailDrawer_fasd": {},
     "toolBarRender": "$C.ToolBar",
 
     "ProSchemaTablee_010": {

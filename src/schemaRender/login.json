@@ -1,0 +1,33 @@
+{
+  "structure": {
+    "component": "page",
+    "id": "page",
+    "children": [
+      {
+        "component": "Layout",
+        "id": "asdf",
+        "style": { "position": "relative", "height": "calc(70vh)" },
+        "children": [
+          {
+            "component": "Title",
+            "children": "asdf"
+          },
+          {
+            "component": "LoginForm",
+            "style": { "position": "absolute", "right": 30, "top": "30%" },
+            "id": "asdffasdf"
+          }
+        ]
+      }
+    ]
+  },
+  "data": {
+    "asdffasdf": {
+      "name": "asdf",
+      "key": "asdf"
+    },
+    "asdf": {
+      "name": "$S.asdffasdf"
+    }
+  }
+}

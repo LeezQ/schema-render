@@ -1,9 +1,10 @@
 import { Table, Button, Badge, Modal, Drawer, Space, Tag } from 'antd';
-import dayjs from 'dayjs';
 import styled from 'styled-components';
 
 import ProSchemaTable from '../../proSchemaTable';
 import React, { useState } from 'react';
+import loginComponentMap from './login';
+import layoutComponentMap from '../../layout';
 
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -22,9 +23,17 @@ const componentMap: any = {
   ProSchemaTable,
   AntdButton: Button,
   AntDTable: Table,
-  Title: styled.div`
-    font-size: 16px;
-  `,
+  Title: (props) => {
+    return (
+      <span>
+        <button
+          onClick={() => props.store.updateData('asdffasdf', { name: '123ss' })}
+        >
+          button
+        </button>{' '}
+      </span>
+    );
+  },
   Actions: styled.div({
     marginBottom: 40,
     '.ant-btn': {
@@ -101,4 +110,8 @@ const componentMap: any = {
   },
 };
 
-export default componentMap;
+export default {
+  ...componentMap,
+  ...loginComponentMap,
+  ...layoutComponentMap,
+};
