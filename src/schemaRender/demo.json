@@ -18,7 +18,7 @@
                 "component": "Actions",
                 "children": [
                   {
-                    "component": "AddAppBtn",
+                    "component": "AntdButton",
                     "id": "AddAppBtn_003",
                     "children": "申请应用 "
                   }

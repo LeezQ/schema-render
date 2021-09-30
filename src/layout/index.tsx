@@ -9,20 +9,9 @@ const layoutComponentMap = {
 
     const contentStyle = props.style || {};
 
-    const data = JSON.parse(saveJson(store.pageData), function (key, value) {
-      if (
-        // 匹配 store
-        typeof value === 'string' &&
-        value.startsWith('$S.')
-      ) {
-        return store.pageData[value.replace('$S.', '')];
-      }
-      return value;
-    });
-
     return (
       <div className={styles.wrap}>
-        {JSON.stringify(data[id])}
+        {JSON.stringify(store.data[id])}
         <div className={styles.header}>
           <h2>聚水潭开放平台</h2>
           <ul className={styles.list}>

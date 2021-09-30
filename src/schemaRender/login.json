@@ -9,10 +9,6 @@
         "style": { "position": "relative", "height": "calc(70vh)" },
         "children": [
           {
-            "component": "Title",
-            "children": "asdf"
-          },
-          {
             "component": "LoginForm",
             "style": { "position": "absolute", "right": 30, "top": "30%" },
             "id": "asdffasdf"
@@ -24,7 +20,7 @@
   "data": {
     "asdffasdf": {
       "name": "asdf",
-      "key": "asdf"
+      "key": "asdf123"
     },
     "asdf": {
       "name": "$S.asdffasdf"

@@ -23,17 +23,12 @@ const componentMap: any = {
   ProSchemaTable,
   AntdButton: Button,
   AntDTable: Table,
-  Title: (props) => {
-    return (
-      <span>
-        <button
-          onClick={() => props.store.updateData('asdffasdf', { name: '123ss' })}
-        >
-          button
-        </button>{' '}
-      </span>
-    );
-  },
+  Title: styled.div({
+    marginBottom: 40,
+    '.ant-btn': {
+      marginRight: 10,
+    },
+  }),
   Actions: styled.div({
     marginBottom: 40,
     '.ant-btn': {

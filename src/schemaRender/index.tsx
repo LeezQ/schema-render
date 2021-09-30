@@ -1,6 +1,11 @@
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  PAGE_KEY_PREFIX,
+  COMPONENT_KEY_PREFIX,
+  EVENT_KEY_PREFIX,
+} from './constant';
 import PageStore from './store/page';
 import { saveJson } from './utils';
 
@@ -17,11 +22,6 @@ interface IComponent {
 export interface ICommonProps extends IComponent {
   store: any;
 }
-
-const PAGE_KEY_PREFIX = '$P.';
-const COMPONENT_KEY_PREFIX = '$C.';
-const EVENT_KEY_PREFIX = '$E.';
-const STORE_KEY_PREFIX = '$S.';
 
 (window as any).PAGE_EVENT = {};
 
@@ -61,20 +61,6 @@ function SchemaRender(props: { schema: string; componentMap: any }) {
   });
 
   pageStore.resolveData(data);
-
-  // // 解析 data 中的 $S
-  // data = JSON.parse(saveJson(data), function (key, value) {
-  //   if (
-  //     // 匹配 store
-  //     typeof value === 'string' &&
-  //     value.startsWith(STORE_KEY_PREFIX)
-  //   ) {
-  //     return pageStore.pageData[value.replace(STORE_KEY_PREFIX, '')];
-  //   }
-  //   return value;
-  // });
-  // // 对 data 重新赋值
-  // pageStore.resolveData(data);
 
   /**
    * 解析获取组件

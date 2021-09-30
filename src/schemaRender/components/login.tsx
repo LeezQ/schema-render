@@ -24,11 +24,10 @@ const waitTime = (time: number = 100) => {
 
 const LoginForm = (props: IProps) => {
   const { title = '手机号登录', store, id, ...rest } = props;
-  const formRef = useRef();
 
   return (
     <LoginWrap {...rest}>
-      <div>{JSON.stringify(store.pageData[id])}</div>
+      <div>{JSON.stringify(store.data[id])}</div>
       <ProLoginForm
         title={title}
         onFinish={async (values: any) => {
