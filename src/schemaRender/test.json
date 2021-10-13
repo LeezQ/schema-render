@@ -1,0 +1,18 @@
+{
+  "structure": {
+    "component": "page",
+    "id": "page",
+    "className": "m-l-10",
+    "style": {
+      "marginLeft": 10
+    },
+    "children": [
+      {
+        "component": "Wrap",
+        "id": "Wrap_2123",
+        "children": "asdf"
+      }
+    ]
+  },
+  "data": {}
+}

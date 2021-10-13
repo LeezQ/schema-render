@@ -1,13 +1,15 @@
-import { observer } from 'mobx-react';
-import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import {
-  PAGE_KEY_PREFIX,
   COMPONENT_KEY_PREFIX,
   EVENT_KEY_PREFIX,
+  PAGE_KEY_PREFIX,
 } from './constant';
+
 import PageStore from './store/page';
+import { PageStoreProvider } from './provider';
+import React from 'react';
+import { observer } from 'mobx-react';
 import { saveJson } from './utils';
+import { v4 as uuidv4 } from 'uuid';
 
 const pageStore = new PageStore();
 
@@ -100,7 +102,6 @@ function SchemaRender(props: { schema: string; componentMap: any }) {
           id,
           className,
           style,
-          store: pageStore,
           ...(compData[child.id] || {}),
         },
         Array.isArray(child.children)
@@ -113,11 +114,11 @@ function SchemaRender(props: { schema: string; componentMap: any }) {
   if (!structure) return null;
 
   return (
-    <>
+    <PageStoreProvider store={pageStore}>
       <div key={structure.id} data-pageid={structure.id}>
         {renderChildren(structure.children || [], data)}
       </div>
-    </>
+    </PageStoreProvider>
   );
 }
 

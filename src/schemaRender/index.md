@@ -5,8 +5,12 @@ Demo:
 ```tsx
 import React from 'react';
 import { SchemaRender } from 'schema-components';
-import componentMap from './components';
-import schemeJson from './demo.json';
+import schemeJson from './test.json';
+const componentMap = {
+  Wrap: () => {
+    return <div>123</div>;
+  },
+};
 
 export default () => (
   <SchemaRender

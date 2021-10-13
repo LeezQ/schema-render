@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
+
 import type { ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import request from 'umi-request';
-import { Button } from 'antd';
 
 export default (props: any) => {
   const { url = '', ...rest } = props;
