@@ -1,16 +1,14 @@
+import { makeAutoObservable } from 'mobx';
 import { STORE_KEY_PREFIX } from '../constant';
-import { makeAutoObservable, makeObservable, observable } from 'mobx';
 import { saveJson } from '../utils';
 
 class PageStore {
-  // @observable rowData: {
-  //   [key: string]: object;
-  // } = {};
-
-  @observable rowData: any = observable.map({});
+  rowData: {
+    [key: string]: object;
+  } = {};
 
   constructor() {
-    makeObservable(this);
+    makeAutoObservable(this);
   }
 
   resolveData(data: { [key: string]: object }) {
@@ -32,11 +30,9 @@ class PageStore {
     return _data;
   }
 
-  updateData = (key: string, data: { [key: string]: object }) => {
-    console.log('update data');
-
+  updateData(key: string, data: { [key: string]: object }) {
     this.rowData[key] = data;
-  };
+  }
 }
 
 export default PageStore;
